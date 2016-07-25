@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="javascript/jquery-2.1.1.min.js"></script>
+    <script src="javascript/jquery-ui.min.js"></script>
+    <link href="http://cdn.bootcss.com/normalize/4.2.0/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/mainstyle.css"/>
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+
+        //模态框
+        $(".btn-start").click(function () {
+
+            var flag = true;
+            var diff = $('#input-diff').val();
+            var name = $('#input-name').val();
+            //check vaild
+
+            if (!diff || !name) {
+                alert("有空字段未填写");
+                flag = false;
+            } else if (!$('#pic').attr('src')) {
+                alert("未上传图片");
+                flag = false;
+            }
+
+            if (flag) {
+                //更新
+                initPuzzle(name, diff);
+                $('.model-container').hide();
+                $('.wrap').removeClass("black-wrap");
+                $('.main-container').show();
+                alert('开始游戏');
+            }
+
+        });
+
+        //jquery-ui提供
+        /*
+         $('#dialog-form').dialog({
+         autoOpen:false,
+         height:600,
+         width:800,
+         modal:true
+         });
+         $(testModel).click(function (e) {
+         $('#dialog-form').dialog("open")
+         });
+         */
+
+        //拖拽上传
+        var area = $('.drag-place').eq(0);
+        area.bind({
+            //prevent browser drag-over default action
+            dragover: function (e) {
+                e.preventDefault();
+            },
+            drop: function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                //fix e.dataTransfer undefined
+                var dtf = e.originalEvent.dataTransfer;
+                var file = dtf.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function () {
+                    //console.log(reader);
+                    var url = this.result;
+                    setImageUrl(url);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        //点击上传
+        $('input[type = file]').change(function () {
+            var file = this.files[0];
+
+            var reader = new FileReader();
+            reader.onload = function () {
+                //console.log(reader);
+                var url = this.result;
+                setImageUrl(url);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        //绑定键盘事件
+        $('.zone-puzzle').on('click',function(){
+            alert("iam trigger")
+        });
+
+        $('.zone-puzzle li').on('click',function(e){
+            alert(this.id);
+            $(this.id).css('transform','scale(1.5)').addClass('selected').siblings().removeClass("selected");
+        });
+
+        $('.part .selected').keydown(function(e){
+            var deg=eval('get'+this.css('transform'));
+            var steps = 90;
+            switch(e.keyCode){
+               case 37:
+                   this.css({'transform':'rotate('+(deg - steps)%360+'deg)'});
+                   break;
+
+               case 39:
+                   this.css({'transform':'rotate('+(deg+step)%360+'deg)'});
+                   break;
+
+           }
+        });
+
+        $(document).keypress(function(e){
+            alert(e.which);
+        });
+
+        //创建image对象
+        var image = new Image;
+
+        function setImageUrl(url) {
+            //update preview pic src
+            $('#pic')[0].src = url;
+            //保存image对象
+            image.src = url;
+        }
+
+        //初始化游戏
+        function initPuzzle(name, diff) {
+            //初始化玩家
+            $(".userinfo .username").eq(0).text(name);
+            //初始化拼图
+            var str = '';
+            var map = $('.zone-puzzle');
+            var arrPos = [];
+            var step = Math.sqrt(diff);
+            for (var i = 0; i < diff; i++) {
+                str += "<li class='part' id='pid" + i + "'></li>"
+            }
+            //console.log(str);
+            for (var i = 0; i < step; i++) {
+                for (var j = 0; j < step; j++) {
+                    var arr = [i*100, j*100];
+                    arrPos.push(arr);
+
+                }
+            }
+            map.append(str);
+
+            $('.zone-puzzle li').css({
+                "width": 100 / step + '%',
+                "height": 100 / step + '%',
+                "background": "url(" + image.src + ")"
+            }).each(function(index,elem){
+                var randomDeg = Math.floor(Math.random()*4)*90;
+                $(elem).css({
+                    "background-position":arrPos[index][0]+"% "+arrPos[index][1]+"%",
+                    "transform":'rotate('+ randomDeg +'deg)'
+                })
+            });
+        }
+
+        function changeDeg(){
+
+        }
+
+        /*
+         * 解析matrix矩阵，0°-360°，返回旋转角度
+         * 当a=b||-a=b,0<=deg<=180
+         * 当-a+b=180,180<=deg<=270
+         * 当a+b=180,270<=deg<=360
+         *
+         * 当0<=deg<=180,deg=d;
+         * 当180<deg<=270,deg=180+c;
+         * 当270<deg<=360,deg=360-(c||d);
+         * */
+        function getmatrix(a,b,c,d,e,f){
+            var aa=Math.round(180*Math.asin(a)/ Math.PI);
+            var bb=Math.round(180*Math.acos(b)/ Math.PI);
+            var cc=Math.round(180*Math.asin(c)/ Math.PI);
+            var dd=Math.round(180*Math.acos(d)/ Math.PI);
+            var deg=0;
+            if(aa==bb||-aa==bb){
+                deg=dd;
+            }else if(-aa+bb==180){
+                deg=180+cc;
+            }else if(aa+bb==180){
+                deg=360-cc||360-dd;
+            }
+            return deg>=360?0:deg;
+            //return (aa+','+bb+','+cc+','+dd);
+        }
+    });
+
+</script>
+<div class="wrap black-wrap">
+    <div class="model-container">
+        <div class="model-input">
+            <span class="input-hint">
+                welcome to the Puzzle Game
+            </span>
+
+            <div class="input-name">
+                <label for="input-name">name</label>
+                <input type="text" class="input-name" id="input-name" required="required"/>
+            </div>
+            <div class="input-difficulty">
+                <label for="input-diff"> choose difficulty</label>
+                <select name="" id="input-diff" required="required">
+                    <option value="4" selected>easy</option>
+                    <option value="9">medium</option>
+                    <option value="16">hard</option>
+                </select>
+            </div>
+        </div>
+        <div class="image-upload">
+            <img src="" id="pic" class="img-preview"/>
+
+            <div class="drag-place"></div>
+        </div>
+        <input type="file"/>
+        <input type="button" class="btn-start" value="start"/>
+    </div>
+
+
+    <div class="main-container">
+        <div class="userinfo">
+            <p class="username">Chill</p>
+
+            <p class="timer">00:00</p>
+        </div>
+        <div class="zone-wrap">
+            <div class="zone zone-puzzle">
+                <!--<li id="pid1" class="part"></li>-->
+                <!--<li id="pid2" class="part"></li>-->
+                <!--<li id="pid3" class="part"></li>-->
+                <!--<li id="pid4" class="part"></li>-->
+
+            </div>
+            <div class="zone zone-match">
+
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-pause" value="pause">pause</button>
+            <button class="btn btn-restart" value="restart">restart</button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

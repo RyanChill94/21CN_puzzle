@@ -1,0 +1,220 @@
+div{
+    box-sizing: border-box;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    /* 触发 hasLayout */
+    zoom: 1;
+}
+
+.wrap {
+    position: relative;
+    height: 768px;
+}
+.black-wrap{
+    background: rgba(0,0,0,0.8);
+}
+
+/*模态框样式*/
+.model-container {
+    /*display: none;*/
+    position: absolute;
+    background: #ffffff;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 3px 2px 8px #000;
+    padding: 15px;
+}
+
+.model-input {
+    width: 80%;
+    margin: 10px auto;
+}
+
+.model-input label{
+    display: inline-block;
+    color: #666;
+    font-size: 16px;
+    width: 15%;
+}
+
+.model-input .input-hint {
+    text-align: center;
+    display: block;
+    margin: 10px;
+    font-size: 18px;
+}
+
+.model-input input{
+    margin: 15px 0;
+}
+.input-name input{
+    width: 30%;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom:1px solid #ccc;
+
+}
+
+.input-name input:hover ,.input-difficulty select:hover{
+    border-bottom:1px solid #00ba0e;
+    transition: all 1s;
+
+}
+
+.input-difficulty select{
+    width: 30%;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom:1px solid #ccc;
+}
+
+.image-upload {
+    margin: 10px 0;
+    padding:10px;
+    height: auto;
+    border: 1px solid #cccccc;
+}
+
+
+
+.image-upload .img-preview {
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 10px;
+    padding: 15px;
+
+}
+.drag-place {
+    background: #ccc;
+    display: inline-block;
+    width: 250px;
+    height: 150px;
+    border: 5px dashed #00ba0e;
+}
+
+.model-container input[type="file"] , .btn-start{
+    display:block;
+    width: 80%;
+    margin: 10px auto;
+}
+
+/*游戏区样式*/
+.main-container {
+    display: none;
+    padding:15px;
+    height: 80%;
+    background: #ffffff;
+    margin: 0 auto;
+
+}
+
+.userinfo p {
+    margin: 10px auto;
+    padding: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: #139a88;
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.zone-wrap {
+    position: relative;
+    padding: 5px;
+    height: 90%;
+
+}
+
+.zone {
+    display: inline-block;
+    border:1px solid #139a88;
+    width: 432px;
+    height: 432px;
+    position: absolute;
+}
+
+.zone-puzzle {
+    left: 10px;
+}
+
+.zone-puzzle .part{
+    display: block;
+    float: left;
+    border: none;
+    z-index: 666;
+}
+
+.part.selected{
+    border: 1px solid #000000;
+    box-shadow: 0 0 10px #000;
+}
+
+/*无法生效*/
+.part:hover{
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+    -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -ms-transition: transform 1s;
+    -o-transition: transform 1s;
+    transition: transform 1s;
+}
+/*#pid1{background: url("../curry.jpg") 0 0 no-repeat;}*/
+/*#pid2{background: url("../curry.jpg") 100% 0 no-repeat}*/
+/*#pid3{background: url("../curry.jpg") 0 100% no-repeat}*/
+/*#pid4{background: url("../curry.jpg") 100% 100% no-repeat}*/
+
+
+.zone-match {
+    right: 10px;
+    background:url("../curry.jpg") ;
+    opacity:0.5;
+}
+
+.btn{
+    width: 30%;
+    height: 40px;
+    outline: none;
+    border: none;
+    background: #139a88;
+    color: #ffffff;
+    border-radius: 15px;
+
+}
+.btn-group {
+    width: 100%;
+    margin: 10px auto;
+}
+
+.btn-pause{
+    position: absolute;
+    left: 10px;
+}
+.btn-restart{
+    position: absolute;
+    right: 10px;
+}
+/*btn样式*/
