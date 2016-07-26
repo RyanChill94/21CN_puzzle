@@ -5,39 +5,64 @@
     <title>Document</title>
     <script src="javascript/jquery-2.1.1.min.js"></script>
     <style>
-       .part{
-           display: block;
-           width: 150px;
-           height: 150px;
-           background: url("curry.jpg");
-       }
-       .part:hover{
-           -webkit-transform: scale(1.5);
-           -moz-transform: scale(1.5);
-           -ms-transform: scale(1.5);
-           -o-transform: scale(1.5);
-           transform: scale(1.5);
-           -webkit-transition: transform 1s;
-           -moz-transition: transform 1s;
-           -ms-transition: transform 1s;
-           -o-transition: transform 1s;
-           transition: transform 1s;
-       }
+        .zone{
+            background: #ccc;
+            width:100%
+            height: 800px;
+        }
+        .part {
+            /*float: left;*/
+            display: block;
+            width: 150px;
+            height: 150px;
+            background: url("curry.jpg");
+        }
+
+        .part:hover {
+            -webkit-transform: scale(1.5);
+            -moz-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            transform: scale(1.5);
+            -webkit-transition: transform 1s;
+            -moz-transition: transform 1s;
+            -ms-transition: transform 1s;
+            -o-transition: transform 1s;
+            transition: transform 1s;
+        }
+
+
     </style>
 </head>
 <script>
     $(document).ready(function () {
-        $('.zone li').on('click',function(){
-           alert(this.id);
+        $('.zone li').on('click', function () {
+            alert(this.id);
+        });
+        $('.zone').on('click', function (e) {
+            e.preventBubble();
+            alert('Iam your father!');
+
         })
-    },false)
+    }, false)
 </script>
 <body>
-   <ul class="zone">
-       <li id="id1" class="part"></li>
-       <li id="id2" class="part"></li>
-       <li id="id3" class="part"></li>
-       <li id="id4" class="part"></li>
-   </ul>
+<ul class="zone">
+    <li id="id1" class="part"></li>
+    <li id="id2" class="part"></li>
+    <li id="id3" class="part"></li>
+    <li id="id4" class="part"></li>
+</ul>
+
+<div class="zone">
+    <div id ="a" style="width:66%"></div>
+    <div id ="b" style="width:34%"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        alert($("#a").innerWidth());
+    })
+</script>
+
 </body>
 </html>

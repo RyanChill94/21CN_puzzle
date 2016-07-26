@@ -35,6 +35,7 @@
                 $('.model-container').hide();
                 $('.wrap').removeClass("black-wrap");
                 $('.main-container').show();
+                bindEvent();
                 alert('开始游戏');
             }
 
@@ -90,34 +91,6 @@
             reader.readAsDataURL(file);
         });
 
-        //绑定键盘事件
-        $('.zone-puzzle').on('click',function(){
-            alert("iam trigger")
-        });
-
-        $('.zone-puzzle li').on('click',function(e){
-            alert(this.id);
-            $(this.id).css('transform','scale(1.5)').addClass('selected').siblings().removeClass("selected");
-        });
-
-        $('.part .selected').keydown(function(e){
-            var deg=eval('get'+this.css('transform'));
-            var steps = 90;
-            switch(e.keyCode){
-               case 37:
-                   this.css({'transform':'rotate('+(deg - steps)%360+'deg)'});
-                   break;
-
-               case 39:
-                   this.css({'transform':'rotate('+(deg+step)%360+'deg)'});
-                   break;
-
-           }
-        });
-
-        $(document).keypress(function(e){
-            alert(e.which);
-        });
 
         //创建image对象
         var image = new Image;
@@ -144,9 +117,8 @@
             //console.log(str);
             for (var i = 0; i < step; i++) {
                 for (var j = 0; j < step; j++) {
-                    var arr = [i*100, j*100];
+                    var arr = [i, j];
                     arrPos.push(arr);
-
                 }
             }
             map.append(str);
@@ -157,14 +129,49 @@
                 "background": "url(" + image.src + ")"
             }).each(function(index,elem){
                 var randomDeg = Math.floor(Math.random()*4)*90;
+                var w = $(this).parent().width()/step;
                 $(elem).css({
-                    "background-position":arrPos[index][0]+"% "+arrPos[index][1]+"%",
-                    "transform":'rotate('+ randomDeg +'deg)'
+                    //转化成百分比
+                    "background-position":arrPos[index][0]*100+"% "+arrPos[index][1]*100+"%",
+                    //任意角度
+                    "transform":'rotate('+ randomDeg +'deg)',
+                    //偏移量
+                    "left":arrPos[index][0]*w +'px',
+                    "top":arrPos[index][1]*w +'px'
                 })
             });
+
+
+
         }
 
-        function changeDeg(){
+        function bindEvent(){
+            //绑定键盘事件
+            $('.part').click(function(e){
+                alert(this.id);
+                $('#'+this.id).addClass('selected').siblings().removeClass("selected");
+            });
+
+
+            $('.part .selected').keydown(function(e){
+                var deg=eval('get'+this.css('transform'));
+                var steps = 90;
+                switch(e.keyCode){
+                    case 37:
+                        this.css({'transform':'rotate('+(deg - steps)%360+'deg)'});
+                        break;
+
+                    case 39:
+                        this.css({'transform':'rotate('+(deg+step)%360+'deg)'});
+                        break;
+
+                }
+            });
+
+//        $(document).keypress(function(e){
+//            alert(e.which);
+//        });
+
 
         }
 

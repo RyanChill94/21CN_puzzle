@@ -94,10 +94,9 @@ div{
 
 
 .image-upload .img-preview {
-    width: 150px;
-    height: 150px;
+    width: 144px;
+    height: 144px;
     display: inline-block;
-    margin: 10px;
     padding: 15px;
 
 }
@@ -158,13 +157,22 @@ div{
 }
 
 .zone-puzzle .part{
+    position: absolute;
     display: block;
-    float: left;
     border: none;
-    z-index: 666;
 }
 
 .part.selected{
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+    -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -ms-transition: transform 1s;
+    -o-transition: transform 1s;
+    transition: transform 1s;
     border: 1px solid #000000;
     box-shadow: 0 0 10px #000;
 }
