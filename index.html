@@ -84,15 +84,26 @@
                 }
 
                 if (flag) {
-                    //初始化游戏
-                    initPuzzle(name, diff);
-                    $('.model-container').hide();
-                    $('.wrap').removeClass("black-wrap");
-                    $('.main-container').show();
-                    bindEvent();
-                    alert('开始游戏');
+                    box.diff = diff;
+                    box.name = name;
+                    start();
                 }
             });
+        }
+
+        function start(){
+            //初始化游戏
+            if(!localStorage.html){
+                initPuzzle(box.name, box.diff);
+            }
+            $('.model-container').fadeOut(500);
+            $('.wrap').removeClass("black-wrap");
+            $('.main-container').fadeIn(500);
+            //绑定事件
+            bindEvent();
+            //计时
+            clock();
+            alert('开始游戏');
         }
 
 
@@ -202,13 +213,12 @@
                 start: function () {
                 },
                 stop: function (event, elem) {
-                    var rot = $('.selected').attr('rot');
-//                    alert("trigger:"+ elem.helper.parent().hasClass('zone-match') );
-                    console.log($('.selected'));
+                    var rot = $(this).attr('rot');
+                    //alert("trigger:"+ elem.helper.parent().hasClass('zone-match') );
                     console.log(rot);
                     //如果放置不成功 恢复原样
                     if (!elem.helper.parent().hasClass('zone-match')) {
-                        $('.selected').css('transform', 'rotate(' + rot + 'deg)').attr('deg', rot).removeClass('.selected');
+                        $(this).css('transform', 'rotate(' + rot + 'deg)').attr('deg', rot).removeClass('.selected');
                     }
                 }
             });
@@ -241,6 +251,53 @@
                  */
                 alert("success");
             }
+        }
+
+        //计时模块 每秒更新缓存的状态
+        function clock(){
+            countingTime();
+            time = setInterval(countingTime,1000);
+            function countingTime(){
+                var t = calc();
+                $('.timer').html(t.m+':'+t.s);
+                var html = $('.zone-wrap').clone();
+                localStorage.html = html.html();
+            }
+        }
+
+        //返回事件
+        function calc(){
+            var t = 0;
+            if(localStorage.time){
+                t = localStorage.time*1;
+            }
+            var date = new Date(t+=1000);
+            localStorage.time = t;
+            return {m:format(Math.floor(t/1000/60)),s:format(date.getSeconds())};
+        }
+
+        //格式化函数
+        function format(v){
+            if(v < 10){ v = '0'+v; }
+            return v;
+        }
+
+        //使用本地缓存
+        function useLocal(){
+            box.name = localStorage.name;
+            box.diff = localStorage.diff;
+            box.url = localStorage.url;
+            $('.zone-wrap').html(localStorage.html);
+            $('.zone-match').css('background-image','url('+arr.img+')');
+            start();
+        }
+
+        //停止计时
+        function clear(){
+            var tab = localStorage.table;
+            clearInterval(time);
+            localStorage.clear();
+            if(tab){ localStorage.table = tab; }
         }
     });
 
