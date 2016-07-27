@@ -160,46 +160,24 @@ div{
     position: absolute;
     display: block;
     border: none;
+    z-index: 555;
 }
 
 .part.selected{
-    -webkit-transform: scale(1.5);
-    -moz-transform: scale(1.5);
-    -ms-transform: scale(1.5);
-    -o-transform: scale(1.5);
-    transform: scale(1.5);
-    -webkit-transition: transform 1s;
-    -moz-transition: transform 1s;
-    -ms-transition: transform 1s;
-    -o-transition: transform 1s;
-    transition: transform 1s;
     border: 1px solid #000000;
     box-shadow: 0 0 10px #000;
+    z-index: 999;
 }
-
-/*无法生效*/
-.part:hover{
-    -webkit-transform: scale(1.5);
-    -moz-transform: scale(1.5);
-    -ms-transform: scale(1.5);
-    -o-transform: scale(1.5);
-    transform: scale(1.5);
-    -webkit-transition: transform 1s;
-    -moz-transition: transform 1s;
-    -ms-transition: transform 1s;
-    -o-transition: transform 1s;
-    transition: transform 1s;
-}
-/*#pid1{background: url("../curry.jpg") 0 0 no-repeat;}*/
-/*#pid2{background: url("../curry.jpg") 100% 0 no-repeat}*/
-/*#pid3{background: url("../curry.jpg") 0 100% no-repeat}*/
-/*#pid4{background: url("../curry.jpg") 100% 100% no-repeat}*/
-
 
 .zone-match {
     right: 10px;
-    background:url("../curry.jpg") ;
-    opacity:0.5;
+}
+
+.zone-match .match{
+    background: rgba(255,255,255,0.8);
+    position: absolute;
+    display: block;
+    border: none;
 }
 
 .btn{
