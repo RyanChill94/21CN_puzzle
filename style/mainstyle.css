@@ -11,7 +11,7 @@ div{
 }
 
 .clearfix {
-    /* ´¥·¢ hasLayout */
+    /* è§¦å‘ hasLayout */
     zoom: 1;
 }
 
@@ -23,7 +23,7 @@ div{
     background: rgba(0,0,0,0.8);
 }
 
-/*Ä£Ì¬¿òÑùÊ½*/
+/*æ¨¡æ€æ¡†æ ·å¼*/
 .model-container {
     /*display: none;*/
     position: absolute;
@@ -114,7 +114,11 @@ div{
     margin: 10px auto;
 }
 
-/*ÓÎÏ·ÇøÑùÊ½*/
+.model-end-container{
+    display: none;
+}
+
+/*æ¸¸æˆåŒºæ ·å¼*/
 .main-container {
     display: none;
     padding:15px;
@@ -203,4 +207,4 @@ div{
     position: absolute;
     right: 10px;
 }
-/*btnÑùÊ½*/
+/*btnæ ·å¼*/
