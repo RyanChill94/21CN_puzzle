@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>puzzle Game</title>
+    <link rel="stylesheet" href="stylesheets/screen.css"/>
+</head>s
+<body>
+    <!--Start Begin-->
+    <div id="start">
+        <div class="box">
+            <h2>Welcome to Puzzle Game！</h2>
+            <p>description:  fun fun fun</p>
+            <form action="#" method="post" onsubmit="return false">
+                <div class="group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required/>
+                </div>
+                <div class="group">
+                    <label for="difficult">Difficult</label>
+                    <select  name="difficult" id="difficult" required>
+                        <option value="2">EASY</option>
+                        <option value="3">MEDIUM</option>
+                        <option value="4">HARD</option>
+                    </select>
+                </div>
+
+                <!--Drop Place-->
+                <div class="group" id="drop">
+                    <input type="file" id="file" required/>
+                    <div class="preview img"></div>
+                </div>
+                <p>Drop your photo Here</p>
+                <!--End of Drop-->
+
+                <div class="group">
+                    <button type="submit" name="submit">Start</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--End Of Start-->
+
+    <!--Finished Start-->
+    <div id="end">
+        <div class="box">
+            <h3>Congratulations! You have solved the puzzle!</h3>
+            <p>Here we go</p>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Position</td>
+                        <td>Level</td>
+                        <td>Name</td>
+                        <td>Time</td>
+                    </tr>
+                </thead>
+            </table>
+            <tbody></tbody>
+        </div>
+        <button class="btn btn-restart-click">Restart</button>
+    </div>
+    <!--Finished End-->
+
+    <!--Game Container-->
+    <div class="gameContiner">
+        <div class="container">
+            <!--PlayerName-->
+            <span id="playName">Hello</span>
+
+            <!--Timer-->
+            <div class="timer">
+                <span>0:00</span>
+            </div>
+            <!--Puzzle-->
+            <div id="puzzle"></div>
+
+            <div id="puzzleDestination" class="img"></div>
+
+            <!--End OfPuzzle-->
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-pause">Pause</button>
+            <button class="btn btn-pause btn-restart btn-restart-click">Pause</button>
+        </div>
+    </div>
+    <!--End Of Game Container-->
+
+    <!--Script-->
+    <script src="javascript/jquery-2.1.1.min.js"></script>
+    <script src="javascript/jquery-ui.min.js"></script>
+    <script src="javascript/re_app.js"></script>
+</body>
+</html>
