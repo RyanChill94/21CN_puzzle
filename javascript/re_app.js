@@ -2,18 +2,16 @@
  * Created by Ryanchill on 2016/9/1.
  */
 
-;
 $(function () {
-
     //暂存对象
     var arr = {}, time;
 
     //init
     $(function () {
         //use localStorage
-        if (localStorage.html) {
-            local();
-        }
+        //if (localStorage.html) {
+        //    local();
+        //}
 
         bind();
     });
@@ -38,7 +36,7 @@ $(function () {
         //开始游戏
         $('form').on('submit', function () {
             localStorage.name = arr.name = $('#name').val();
-            localStorage.level = arr.level = $('difficult').val();
+            localStorage.level = arr.level = $('#difficult').val();
             $('#start').fadeOut(1000);
             start();
         });
@@ -78,7 +76,8 @@ $(function () {
     //上传文件转为base64
 
     function filereader(e) {
-        var file = e.target.file[0];
+        console.log(e.target);
+        var file = e.target.files[0];
         var reader = new FileReader();
 
         if (!file) return false;
@@ -98,11 +97,12 @@ $(function () {
     }
 
     function start() {
-        $('#start,#end').fadeOut(300);
-        $('#pizzleContainer>*').fadeIn(300);
-        if (!localStorage.html) {
-            create();
-        }
+        $("#start,#end").fadeOut(300);
+        $('#puzzleContainer>*').fadeIn(300);
+        //if (!localStorage.html) {
+        //    create();
+        //}
+        create();
         localStorage.img = arr.img;
         $('#player').html(arr.name);
         move();
@@ -112,7 +112,8 @@ $(function () {
     function create() {
         var from = '', to = '', drag, bg, left, top, deg, n = 0,
             lev = arr.level, size = 500 / lev;
-
+        console.log(arr.level);
+        console.log(lev);
         for (var i = 0; i < lev * lev; i++) {
             //图片偏移量
             left = i % lev * size;
@@ -131,16 +132,15 @@ $(function () {
         }
 
         //打乱
-        var sort = $(from).sort(function () {
-            return 0.5 - Math.random()
-        });
+        var sort = $(from).sort(function(){ return 0.5-Math.random() });
+        console.log("sort:",sort);
         $('#puzzle').html(sort);
         $('#puzzleDestination').html(to).css('background-image', 'url(' + arr.img + ')');
     }
 
     function move() {
         $('.undone .drag').draggable({
-            revert: 'invaild', //不满足条件复原
+            revert: 'invalid', //不满足条件复原
             snap: '.done', //接受的容器
             start: function () {
                 toggle($(this));
@@ -167,7 +167,7 @@ $(function () {
             },
             drop: function (e, ui) {
                 //console.log(ui)
-                ui.draggable.removeClass('active').removeAttr('style').unind('click').draggable('disable').hide();
+                ui.draggable.removeClass('active').removeAttr('style').unbind('click').draggable('disable').hide();
                 $(this).append(ui.draggable.fadeIn(300));
 
                 //判断是否满足胜利条件
@@ -176,7 +176,8 @@ $(function () {
         });
 
         window.addEventListener('keydown', function (e) {
-            var deg = $('active').attr('deg') * 1;
+            //alert("lalalla");
+            var deg = $('.active').attr('deg') * 1;
             switch (e.keyCode) {
                 case 37:
                     deg += -90;
@@ -187,12 +188,13 @@ $(function () {
             }
             $('.active').css('transform', 'rotate(' + deg + 'deg) scale(1.1)').attr('deg', deg);
         }, false);
-    };
+    }
 
     //切换
     function toggle(obj){
         var old = $('.active'),
             deg = obj.attr('deg');
+        console.log(deg);
         old.removeClass('active').css('transform','rotate('+ old.attr('deg') +'deg)');
         obj.addClass('active').css('transform','rotate('+ deg +'deg) scale(1.1)');
     }
@@ -255,7 +257,7 @@ $(function () {
             v.pos = i + 1;
             return (i<3 || table.num == v.num);
         }).forEach(function(v,i){
-            var data = new Date(v.time*1);
+            var date = new Date(v.time*1);
             var me = '';
             if(table.num == v.num){me = 'class="me"';}
             str += '<tr '+me+'>\
@@ -270,7 +272,7 @@ $(function () {
     }
 
     //计时
-    function clcok(){
+    function clock(){
         time_fun();
         //声明为全局变量
         time = setInterval(time_fun,1000);
@@ -280,6 +282,7 @@ $(function () {
             $('#timer').html(t.m + ':' + t.s);
 
             //保存这一秒状态
+            //console.log($('#puzzleContainer'));
             var $html = $('#puzzleContainer').clone();
             $html.find('.img').css('backgroundImage','');
             localStorage.html = $html.html();
@@ -289,13 +292,13 @@ $(function () {
     //获取时间
     function calc(){
         var t = 0;
-        if(localStorage.time){
+       /* if(localStorage.time){
             t = localStorage.time*1;
-        }
+        }*/
 
         var date = new Date(t+=1000);
         //保存在本地缓存
-        localStorage.time =t;
+        //localStorage.time =t;
         return {m:format(date.getMinutes()),s:format(date.getSeconds())};
     }
 
@@ -306,15 +309,15 @@ $(function () {
     }
 
     //使用本地缓存
-    function local(){
-        arr.name = localStorage.name;
-        arr.level = localStorage.level;
-        arr.img = localStorage.img;
-
-        $('#puzzleContainer').html(localStorage.html)
-            .find('.img').css('backgroundImage','url('+arr.img+')');
-        start();
-    }
+    //function local(){
+    //    arr.name = localStorage.name;
+    //    arr.level = localStorage.level;
+    //    arr.img = localStorage.img;
+    //
+    //    $('#puzzleContainer').html(localStorage.html)
+    //        .find('.img').css('backgroundImage','url('+arr.img+')');
+    //    start();
+    //}
 
     function clear(){
         var tab = localStorage.table;
