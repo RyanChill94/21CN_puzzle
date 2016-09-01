@@ -5,7 +5,7 @@
 ;
 $(function () {
 
-    //Ôİ´æ¶ÔÏó
+    //æš‚å­˜å¯¹è±¡
     var arr = {}, time;
 
     //init
@@ -20,7 +20,7 @@ $(function () {
 
     function bind() {
 
-        //¿ÉÍÏ×§
+        //å¯æ‹–æ‹½
         $('html').bind({
             dragover: false,
             drop: function (e) {
@@ -30,12 +30,12 @@ $(function () {
             }
         });
 
-        //ÎÄ¼ş¶ÁÈ¡
+        //æ–‡ä»¶è¯»å–
         $('#file').on('change', function (e) {
             filereader(e);
         });
 
-        //¿ªÊ¼ÓÎÏ·
+        //å¼€å§‹æ¸¸æˆ
         $('form').on('submit', function () {
             localStorage.name = arr.name = $('#name').val();
             localStorage.level = arr.level = $('difficult').val();
@@ -43,12 +43,12 @@ $(function () {
             start();
         });
 
-        //ÖØÆôÓÎÏ·
+        //é‡å¯æ¸¸æˆ
         $('.btn-restart-click').on('click', function () {
             $('#start').fadeIn(300);
             $('#end').fadeOut(300);
 
-            //Çå³ıËùÓĞ»º´æ
+            //æ¸…é™¤æ‰€æœ‰ç¼“å­˜
             clear();
 
 
@@ -58,24 +58,24 @@ $(function () {
             }, 200)
         });
 
-        //ÔİÍ£ÓÎÏ·
+        //æš‚åœæ¸¸æˆ
         $('btn-pause').on('click', function () {
             if ($(this).html() == 'Pause') {
-                //ÔİÍ£ÓÎÏ·
+                //æš‚åœæ¸¸æˆ
                 $(this).html('Resume');
                 clearInterval(time);
                 $('#puzzleContainer>*').fadeOut(300);
             } else {
-                //¼ÌĞøÓÎÏ·
+                //ç»§ç»­æ¸¸æˆ
                 $(this).html('Pause');
-                clock(); //¼ÆÊ±
+                clock(); //è®¡æ—¶
                 $('#puzzleContainer>*').fadeIn(300);
             }
         });
 
     }
 
-    //ÉÏ´«ÎÄ¼ş×ªÎªbase64
+    //ä¸Šä¼ æ–‡ä»¶è½¬ä¸ºbase64
 
     function filereader(e) {
         var file = e.target.file[0];
@@ -83,7 +83,7 @@ $(function () {
 
         if (!file) return false;
 
-        //¹ıÂË¸ñÊ½
+        //è¿‡æ»¤æ ¼å¼
         //image/jpg | image/jpeg
         if (!(/image\/(jpg|jpeg)/.test(file.type))) {
             alert('JPG format only');
@@ -114,7 +114,7 @@ $(function () {
             lev = arr.level, size = 500 / lev;
 
         for (var i = 0; i < lev * lev; i++) {
-            //Í¼Æ¬Æ«ÒÆÁ¿
+            //å›¾ç‰‡åç§»é‡
             left = i % lev * size;
             top = n * size;
             deg = Math.ceil(Math.random() * 3) * 90;
@@ -130,7 +130,7 @@ $(function () {
 
         }
 
-        //´òÂÒ
+        //æ‰“ä¹±
         var sort = $(from).sort(function () {
             return 0.5 - Math.random()
         });
@@ -140,14 +140,14 @@ $(function () {
 
     function move() {
         $('.undone .drag').draggable({
-            revert: 'invaild', //²»Âú×ãÌõ¼ş¸´Ô­
-            snap: '.done', //½ÓÊÜµÄÈİÆ÷
+            revert: 'invaild', //ä¸æ»¡è¶³æ¡ä»¶å¤åŸ
+            snap: '.done', //æ¥å—çš„å®¹å™¨
             start: function () {
                 toggle($(this));
             },
             stop: function (e, ui) {
                 var rot = $('.active').attr('rot');
-                //ÅĞ¶Ï
+                //åˆ¤æ–­
                 if (ui.helper.parent().attr('class') == 'undone') {
                     $('.active').css('transform', 'rotate(' + rot + 'deg)').attr('deg', rot).removeClass('active');
                 }
@@ -160,7 +160,7 @@ $(function () {
         $('.done').droppable({
             accept: function () {
                 var act = $('.active');
-                //ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ·ÅÖÃ
+                //åˆ¤æ–­æ˜¯å¦å¯ä»¥æ”¾ç½®
                 if (act.attr('deg' % 360 == 0 && $(this).attr('gid') == act.attr('gid'))) {
                     return true;
                 }
@@ -170,7 +170,7 @@ $(function () {
                 ui.draggable.removeClass('active').removeAttr('style').unind('click').draggable('disable').hide();
                 $(this).append(ui.draggable.fadeIn(300));
 
-                //ÅĞ¶ÏÊÇ·ñÂú×ãÊ¤ÀûÌõ¼ş
+                //åˆ¤æ–­æ˜¯å¦æ»¡è¶³èƒœåˆ©æ¡ä»¶
                 over();
             }
         });
@@ -189,7 +189,7 @@ $(function () {
         }, false);
     };
 
-    //ÇĞ»»
+    //åˆ‡æ¢
     function toggle(obj){
         var old = $('.active'),
             deg = obj.attr('deg');
@@ -197,7 +197,7 @@ $(function () {
         obj.addClass('active').css('transform','rotate('+ deg +'deg) scale(1.1)');
     }
 
-    //ÓÎÏ·½áÊø
+    //æ¸¸æˆç»“æŸ
     function over(){
         if($('.done .drag').length == $('.done').length){
             table();
@@ -206,7 +206,7 @@ $(function () {
         }
     }
 
-    //Éú³ÉÅÅÃûÊı¾İ
+    //ç”Ÿæˆæ’åæ•°æ®
     function table(){
         $.ajax({
             type:'POST',
@@ -226,8 +226,102 @@ $(function () {
         });
     }
 
+    //æœ¬åœ°ç¼“å­˜æ–¹å¼è·å–æ¸¸æˆæ’åº
+    function tableLocalStorage(){
+        var json = [];
+        var table ={
+            num:1,
+            level:$('select option[value='+arr.level+']').html(),
+            name:arr.name,
+            time:localStorage.time*1
+        };
 
+        if(localStorage.table){
+            json = JSON.parse(localStorage.table);
+            table.num = json[json.length-1].num*1 + 1;
+        }
 
+        //å­˜è¿›å¯¹è±¡æ•°ç»„
+        json.push(table);
+        //è½¬æˆJSONå­—ç¬¦ä¸²
+        localStorage.table = JSON.stringify(json);
+
+        var str = '';
+        json.filter(function(v,i){
+            return(v.level == table.level);
+        }).sort(function(a,b){
+            return (a.time*1 > b.time*1);
+        }).filter(function(v,i){
+            v.pos = i + 1;
+            return (i<3 || table.num == v.num);
+        }).forEach(function(v,i){
+            var data = new Date(v.time*1);
+            var me = '';
+            if(table.num == v.num){me = 'class="me"';}
+            str += '<tr '+me+'>\
+					<td>'+v.pos+'</td>\
+					<td>'+v.level+'</td>\
+					<td>'+v.name+'</td>\
+					<td>'+format(Math.floor(v.time/1000/60))+':'+format(date.getSeconds())+'</td>\
+				</tr>';
+        });
+
+        $('table tbody').html(str);
+    }
+
+    //è®¡æ—¶
+    function clcok(){
+        time_fun();
+        //å£°æ˜ä¸ºå…¨å±€å˜é‡
+        time = setInterval(time_fun,1000);
+        function time_fun(){
+            //è·å–æ–°è®¡æ—¶ æˆ–è€… ç¼“å­˜è®¡æ—¶
+            var t = calc();
+            $('#timer').html(t.m + ':' + t.s);
+
+            //ä¿å­˜è¿™ä¸€ç§’çŠ¶æ€
+            var $html = $('#puzzleContainer').clone();
+            $html.find('.img').css('backgroundImage','');
+            localStorage.html = $html.html();
+        }
+    }
+
+    //è·å–æ—¶é—´
+    function calc(){
+        var t = 0;
+        if(localStorage.time){
+            t = localStorage.time*1;
+        }
+
+        var date = new Date(t+=1000);
+        //ä¿å­˜åœ¨æœ¬åœ°ç¼“å­˜
+        localStorage.time =t;
+        return {m:format(date.getMinutes()),s:format(date.getSeconds())};
+    }
+
+    //æ ¼å¼åŒ–æ—¶é—´
+    function format(v){
+        if(v < 10){ v = '0'+v;}
+        return v;
+    }
+
+    //ä½¿ç”¨æœ¬åœ°ç¼“å­˜
+    function local(){
+        arr.name = localStorage.name;
+        arr.level = localStorage.level;
+        arr.img = localStorage.img;
+
+        $('#puzzleContainer').html(localStorage.html)
+            .find('.img').css('backgroundImage','url('+arr.img+')');
+        start();
+    }
+
+    function clear(){
+        var tab = localStorage.table;
+        clearInterval(time);
+        localStorage.clear();
+        if(tab){ localStorage.table = tab; }
+    }
 
 
 });
