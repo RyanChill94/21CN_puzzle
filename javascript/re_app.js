@@ -9,9 +9,9 @@ $(function () {
     //init
     $(function () {
         //use localStorage
-        //if (localStorage.html) {
-        //    local();
-        //}
+        if (localStorage.html) {
+            local();
+        }
 
         bind();
     });
@@ -137,7 +137,7 @@ $(function () {
     }
 
     function move() {
-        $('.undone .drag').draggable({
+        $(".undone .drag").draggable({
             revert: 'invalid', //不满足条件复原
             snap: '.done', //接受的容器
             start: function () {
@@ -202,6 +202,9 @@ $(function () {
     //游戏结束
     function over(){
         if($('.done .drag').length == $('.done').length){
+            arr.time = localStorage.time*1;
+            clearInterval(time);
+            //发送数据给后台
             table();
             $('#end').delay(500).show(500);
             clear();
@@ -216,14 +219,14 @@ $(function () {
             data:{
                 level:arr.level,
                 name:arr.name,
-                time:localStorage.time * 1
+                time:arr.time
             },
 
             success:function(res){
                 $('table tbody').html(res);
             },
             error: function () {
-                $('table tbody').html('');
+                tableLocalStorage();
             }
         });
     }
@@ -233,9 +236,10 @@ $(function () {
         var json = [];
         var table ={
             num:1,
-            level:$('select option[value='+arr.level+']').html(),
+            //level:$('select option[value='+arr.level+']').html(),
+            level:arr.level,
             name:arr.name,
-            time:localStorage.time*1
+            time:arr.time
         };
 
         if(localStorage.table){
@@ -249,15 +253,17 @@ $(function () {
         localStorage.table = JSON.stringify(json);
 
         var str = '';
-        json.filter(function(v,i){
+        json.filter(function(v){
             return(v.level == table.level);
         }).sort(function(a,b){
             return (a.time*1 > b.time*1);
         }).filter(function(v,i){
             v.pos = i + 1;
             return (i<3 || table.num == v.num);
-        }).forEach(function(v,i){
+        }).forEach(function(v){
+            console.log(v.time);
             var date = new Date(v.time*1);
+            console.log(date);
             var me = '';
             if(table.num == v.num){me = 'class="me"';}
             str += '<tr '+me+'>\
@@ -292,13 +298,13 @@ $(function () {
     //获取时间
     function calc(){
         var t = 0;
-       /* if(localStorage.time){
+        if(localStorage.time){
             t = localStorage.time*1;
-        }*/
+        }
 
         var date = new Date(t+=1000);
         //保存在本地缓存
-        //localStorage.time =t;
+        localStorage.time =t;
         return {m:format(date.getMinutes()),s:format(date.getSeconds())};
     }
 
@@ -309,15 +315,15 @@ $(function () {
     }
 
     //使用本地缓存
-    //function local(){
-    //    arr.name = localStorage.name;
-    //    arr.level = localStorage.level;
-    //    arr.img = localStorage.img;
-    //
-    //    $('#puzzleContainer').html(localStorage.html)
-    //        .find('.img').css('backgroundImage','url('+arr.img+')');
-    //    start();
-    //}
+    function local(){
+        arr.name = localStorage.name;
+        arr.level = localStorage.level;
+        arr.img = localStorage.img;
+
+        $('#puzzleContainer').html(localStorage.html)
+            .find('.img').css('backgroundImage','url('+arr.img+')');
+        start();
+    }
 
     function clear(){
         var tab = localStorage.table;
