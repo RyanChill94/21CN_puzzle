@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link href="http://cdn.bootcss.com/normalize/4.2.0/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/main.css"/>
+</head>
+<body>
+<div class="wrap black-wrap">
+    <div class="model-container">
+        <div class="model-input">
+            <span class="input-hint">
+                welcome to the Puzzle Game
+            </span>
+
+            <div class="input-name">
+                <label for="input-name">name</label>
+                <input type="text" class="input-name" id="input-name" required="required"/>
+            </div>
+            <div class="input-difficulty">
+                <label for="input-diff"> choose difficulty</label>
+                <select name="" id="input-diff" required="required">
+                    <option value="4" selected>easy</option>
+                    <option value="9">medium</option>
+                    <option value="16">hard</option>
+                </select>
+            </div>
+        </div>
+        <div class="image-upload">
+            <img src="" id="pic" class="img-preview"/>
+
+            <div class="drag-place"></div>
+        </div>
+        <input type="file"/>
+        <input type="button" class="btn-start" value="start"/>
+
+    </div>
+    <div class="model-end-container">
+        <span>over</span>
+    </div>
+
+
+    <div class="main-container">
+        <div class="userinfo">
+            <p class="username">Chill</p>
+
+            <p class="timer">00:00</p>
+        </div>
+        <div class="zone-wrap">
+            <div class="zone zone-puzzle">
+                <!--<li id="pid1" class="part"></li>-->
+                <!--<li id="pid2" class="part"></li>-->
+                <!--<li id="pid3" class="part"></li>-->
+                <!--<li id="pid4" class="part"></li>-->
+            </div>
+            <div class="zone zone-match">
+
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-pause" value="pause">pause</button>
+            <button class="btn btn-restart" value="restart">restart</button>
+        </div>
+
+    </div>
+</div>
+<script src="../javascript/jquery-2.1.1.min.js"></script>
+<script src="../javascript/jquery-ui.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

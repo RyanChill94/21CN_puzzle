@@ -57,7 +57,7 @@ $(function () {
 
         //暂停游戏
         $('.btn-pause').on('click', function () {
-            alert('pause');
+            //alert('pause');
             if ($(this).html() == 'Pause') {
                 //暂停游戏
                 $(this).html('Resume');

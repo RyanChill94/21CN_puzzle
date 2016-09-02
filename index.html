@@ -2,73 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <link href="http://cdn.bootcss.com/normalize/4.2.0/normalize.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/main.css"/>
+    <title>puzzle Game</title>
+    <link rel="stylesheet" href="stylesheets/screen.css"/>
 </head>
 <body>
-<div class="wrap black-wrap">
-    <div class="model-container">
-        <div class="model-input">
-            <span class="input-hint">
-                welcome to the Puzzle Game
-            </span>
+    <!--Start Begin-->
+    <div id="start">
+        <div class="box">
+            <h2>Welcome to Puzzle Game！</h2>
+            <p>description:  fun fun fun</p>
+            <form action="#" method="post" onsubmit="return false;">
+                <div class="group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required/>
+                </div>
+                <div class="group">
+                    <label for="difficult">Difficult</label>
+                    <select  type="text" name="difficult" id="difficult" required>
+                        <option value="2">EASY</option>
+                        <option value="3">MEDIUM</option>
+                        <option value="4">HARD</option>
+                    </select>
+                </div>
 
-            <div class="input-name">
-                <label for="input-name">name</label>
-                <input type="text" class="input-name" id="input-name" required="required"/>
-            </div>
-            <div class="input-difficulty">
-                <label for="input-diff"> choose difficulty</label>
-                <select name="" id="input-diff" required="required">
-                    <option value="4" selected>easy</option>
-                    <option value="9">medium</option>
-                    <option value="16">hard</option>
-                </select>
-            </div>
+                <!--Drop Place-->
+                <div class="group" id="drop">
+                    <input type="file" id="file" required/>
+                    <div class="preview img"></div>
+                    <p>Drop your photo Here</p>
+                </div>
+                <!--End of Drop-->
+
+                <div class="group">
+                    <button type="submit" name="submit">Start</button>
+                </div>
+            </form>
         </div>
-        <div class="image-upload">
-            <img src="" id="pic" class="img-preview"/>
-
-            <div class="drag-place"></div>
-        </div>
-        <input type="file"/>
-        <input type="button" class="btn-start" value="start"/>
-
     </div>
-    <div class="model-end-container">
-        <span>over</span>
+    <!--End Of Start-->
+
+    <!--Finished Start-->
+    <div id="end">
+        <div class="box">
+            <h3>Congratulations! You have solved the puzzle!</h3>
+            <p>Here we go</p>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Position</td>
+                        <td>Level</td>
+                        <td>Name</td>
+                        <td>Time</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button class="btn btn-restart-click">Restart</button>
+        </div>
     </div>
+    <!--Finished End-->
 
+    <!--Game Container-->
+    <div class="gameContainer">
+        <div class="container">
 
-    <div class="main-container">
-        <div class="userinfo">
-            <p class="username">Chill</p>
+            <!--PlayerName-->
+            <span id="playername">Hello</span>
 
-            <p class="timer">00:00</p>
-        </div>
-        <div class="zone-wrap">
-            <div class="zone zone-puzzle">
-                <!--<li id="pid1" class="part"></li>-->
-                <!--<li id="pid2" class="part"></li>-->
-                <!--<li id="pid3" class="part"></li>-->
-                <!--<li id="pid4" class="part"></li>-->
+            <!--Timer-->
+            <div id="timer">
+                <span>0:00</span>
             </div>
-            <div class="zone zone-match">
+            <!--Puzzle-->
+            <div id="puzzleContainer">
+                <div id="puzzle"></div>
 
+                <div id="puzzleDestination" class="img"></div>
+            </div>
+            <!--End OfPuzzle-->
+
+            <div class="buttons">
+                <button class="btn btn-pause">Pause</button>
+                <button class="btn btn-restart btn-restart-click">restart</button>
             </div>
         </div>
-
-        <div class="btn-group">
-            <button class="btn btn-pause" value="pause">pause</button>
-            <button class="btn btn-restart" value="restart">restart</button>
-        </div>
-
     </div>
-</div>
-<script src="javascript/jquery-2.1.1.min.js"></script>
-<script src="javascript/jquery-ui.min.js"></script>
-<script src="javascript/app.js"></script>
+    <!--End Of Game Container-->
+
+    <!--Script-->
+    <!--<script>-->
+        <!--localStorage.clear();-->
+        <!--clearInterval(time);-->
+    <!--</script>-->
+    <script src="javascript/jquery-2.1.1.min.js"></script>
+    <script src="javascript/jquery-ui.min.js"></script>
+    <script src="javascript/re_app.js"></script>
+    <!--<script src="javascript/script.js"></script>-->
 </body>
 </html>
