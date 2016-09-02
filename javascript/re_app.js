@@ -49,7 +49,6 @@ $(function () {
             //清除所有缓存
             clear();
 
-
             setTimeout(function () {
                 $('.img').css('backgroundImage', '');
                 $('#file').val('');
@@ -57,7 +56,8 @@ $(function () {
         });
 
         //暂停游戏
-        $('btn-pause').on('click', function () {
+        $('.btn-pause').on('click', function () {
+            alert('pause');
             if ($(this).html() == 'Pause') {
                 //暂停游戏
                 $(this).html('Resume');
@@ -74,7 +74,6 @@ $(function () {
     }
 
     //上传文件转为base64
-
     function filereader(e) {
         console.log(e.target);
         var file = e.target.files[0];
@@ -112,8 +111,8 @@ $(function () {
     function create() {
         var from = '', to = '', drag, bg, left, top, deg, n = 0,
             lev = arr.level, size = 500 / lev;
-        console.log(arr.level);
-        console.log(lev);
+        //console.log(arr.level);
+        //console.log(lev);
         for (var i = 0; i < lev * lev; i++) {
             //图片偏移量
             left = i % lev * size;
@@ -133,7 +132,6 @@ $(function () {
 
         //打乱
         var sort = $(from).sort(function(){ return 0.5-Math.random() });
-        console.log("sort:",sort);
         $('#puzzle').html(sort);
         $('#puzzleDestination').html(to).css('background-image', 'url(' + arr.img + ')');
     }
@@ -145,7 +143,7 @@ $(function () {
             start: function () {
                 toggle($(this));
             },
-            stop: function (e, ui) {
+            stop: function (event, ui) {
                 var rot = $('.active').attr('rot');
                 //判断
                 if (ui.helper.parent().attr('class') == 'undone') {
@@ -157,16 +155,17 @@ $(function () {
         });
 
 
+
         $('.done').droppable({
             accept: function () {
                 var act = $('.active');
                 //判断是否可以放置
-                if (act.attr('deg' % 360 == 0 && $(this).attr('gid') == act.attr('gid'))) {
+                if (act.attr('deg') % 360 == 0 && $(this).attr('gid') == act.attr('gid')) {
                     return true;
                 }
             },
             drop: function (e, ui) {
-                //console.log(ui)
+                console.log(ui);
                 ui.draggable.removeClass('active').removeAttr('style').unbind('click').draggable('disable').hide();
                 $(this).append(ui.draggable.fadeIn(300));
 
@@ -190,11 +189,12 @@ $(function () {
         }, false);
     }
 
+
     //切换
     function toggle(obj){
         var old = $('.active'),
             deg = obj.attr('deg');
-        console.log(deg);
+        //console.log(deg);
         old.removeClass('active').css('transform','rotate('+ old.attr('deg') +'deg)');
         obj.addClass('active').css('transform','rotate('+ deg +'deg) scale(1.1)');
     }
@@ -325,6 +325,4 @@ $(function () {
         localStorage.clear();
         if(tab){ localStorage.table = tab; }
     }
-
-
 });

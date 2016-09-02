@@ -1,0 +1,220 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+	font-family: "Arial",sans-serif;
+	color: #282828;
+	text-decoration: none;
+	list-style-type: none
+}
+body{
+	background: #009BBC;
+	width: 100%;
+	height: 100%
+}
+.group{
+	margin-bottom: 10px
+}
+.group input,.group select{
+	width: 100%;
+	height: 40px;
+	line-height: 40px
+}
+.group label{
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 13px
+}
+.group *{
+	display: block;
+}
+.container{
+	width: 1140px;
+	margin: auto
+}
+
+.box{
+	width: 1000px;
+	margin: auto;
+	margin-top: 100px;
+	background: white;
+	border-radius: 4px;
+	padding: 30px
+}
+button{
+	width: 100%;
+	height: 60px
+}
+#start,#end{
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	background: rgba(0,0,0,0.6);
+	z-index: 999999
+}
+.hide{
+	display: none !important
+}
+#gameContainer .container{
+	padding-top: 10px;
+	display: block;
+	position: relative
+}
+#preview{
+	position: absolute;
+	display: block;
+	width: 165px;
+	height: 165px;
+	bottom: 394px;
+  	right: -190px;
+	background: white
+}
+#drop .preview{
+	float: left;
+	margin-right: 10px;
+	height: 100px;
+  	width: 100px
+}
+#drop{
+	display: block;
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	border: dotted 1px rgba(0,0,0,0.2)
+}
+p{
+	text-align: center
+}
+h3{
+	text-align: center
+}
+table th,table td{
+	padding: 10px;
+	border: solid 1px rgba(0,0,0,0.2)
+}
+table{
+	width: 100%;
+	border-collapse: collapse
+}
+#playername,#timer{
+	display: block;
+	text-align: center
+}
+#playername{
+	background: white;
+	height: 40px;
+	line-height: 40px;
+	font-size: 22px;
+	font-weight: bold
+}
+#timer span{
+	color: white
+}
+#timer{
+	background: rgba(0,0,0,0.5);
+	font-size: 18px;
+	height: 40px;
+	line-height: 40px;
+	color: white
+}
+h2{
+	text-align: center
+}
+#preview,#drop .preview{
+}
+
+#puzzleContainer > div:last-child{
+	margin-right: 0px
+}
+#puzzleContainer > div{
+	float: left;
+	width: 500px;
+	height: 500px;
+	margin-right: 139px
+}
+
+#end{ 
+	display:none; 
+	overflow:hidden
+}
+#drop{ 
+	position:relative
+}
+#drop .img{ 
+	height:100%; 
+	width:100px
+}
+#file{ 
+	position:absolute; 
+	height:100%; 
+	width:100%; 
+	left:0; 
+	top:0; 
+	opacity:0
+}
+.img{ 
+	background:rgba(0,0,0,0.2) no-repeat center/cover;
+}
+.bg{ 
+	width:500px; 
+	height:500px; 
+	position:absolute
+}
+.drag{ 
+	position:relative; transition:transform 0.2s; 
+	overflow:hidden; 
+	width:100%; 
+	height:100%
+}
+.undone,.done{ 
+	float:left
+}
+.done{ 
+	background:rgba(0,155,188,0.8)
+}
+#puzzleContainer{ 
+	height:500px
+}
+.active{ 
+	box-shadow:0 0 30px 10px rgba(0,0,0,0.8); 
+	z-index:5
+}
+.me{ 
+	background:rgba(41,150,80,0.2)
+}
+
+
+button{ 
+	border-radius:5px; 
+	background:#08638A; 
+	color:#fff; 
+	font-size:18px; 
+	border:none; 
+	margin:10px 0; 
+	box-shadow:0 5px 0 #034866; 
+	cursor:pointer
+}
+button:hover{ 
+	background:#09729F
+}
+button:active{ 
+	box-shadow:0 3px 0 #034866; 
+	background:#07597C; 
+	transform:translate(0,2px)
+}
+.btn-pause{
+	float: left;
+	width: 550px;
+	height: 50px;
+	margin: 10px 39px 0 0
+}
+.btn-restart{
+	float: left;
+	width: 550px;
+	height: 50px;
+	margin: 10px 0 0
+}
+
